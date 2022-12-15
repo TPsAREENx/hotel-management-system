@@ -1,0 +1,31 @@
+create database hotel_system;
+
+use hotel_system;
+
+create table login(user_name varchar(20) primary key, passw varchar(10) NOT NULL);
+
+create table rooms(s_no int(3) NOT NULL, room_type char(60) UNIQUE, price decimal(60,2) UNIQUE, bed_size char(60) NOT NULL);
+
+insert into rooms values(1,'Deluxe','7999','Single bed')
+    ,(2, 'Basic suite', '11999', 'Double bed')
+    ,(3,'Executive suite', '15999', 'Two-single beds')
+    ,(4,'Garden villa', '18999', 'Queen bed' )
+    ,(5,'Presidential suite', '24999', 'King bed' );
+
+create table guests(g_id varchar(15) primary key,f_name varchar(60) NOT NULL, l_name varchar(60), age int(4) NOT NULL, gender char(40) NOT NULL, valid_id char(60), room char(60) NOT NULL, checkin date NOT NULL, checkout date NOT NULL);
+
+Create table staff(staff_id varchar(15) primary key,f_name char(60) NOT NULL, l_name char(60) NOT NULL, id_proof char(60) NOT NULL, dept char(60), salary varchar(60) NOT NULL, desig char(60) NOT NULL,mobile_no varchar(20) NOT NULL);
+
+insert into staff values('a1','Rahul', 'Purohit', 'Passport', 'Hod', '75,000', 'Manager','9045'),
+('a2','Sarah', 'Bhatnager', 'Adhaar', 'Reception','45,000', 'Receptionist','12345'),
+('a3','Atif', 'Aslam', 'Adhaar','Reception', '45,000','Receptionist','123456'),
+('a4','Raj','Kumar','Driving Licence', 'House Keeping','15,000','Room Boy','12347'),
+('a5','Amarjeet','Singh','Passport','House Keeping','15,000','Room Boy','1456'),
+('a6','Bhanu','Pratap','Pan Card','Room Service','25,000','Chef','6789'),
+('a7','Abhinav','Singh','Pan Card','Restaurant','15,000','Waiter','8970');
+
+create table restaurant(sno integer(10) primary key,itemname varchar(10),rate varchar(20) NOT NULL);
+
+insert into restaurant values(1,"tea",20), (2,"coffee",40), (3,"colddrink",50), (4,"samosa",25), (5,"sandwich",50), (6,"Dhokla",30), (7,"kachori",20), (8,"milk",20), (9,"noodles",65), (10,"pasta",70);
+
+create table bill(g_id varchar(10) primary key, name varchar(60) not null, room char(30) not null, checkin date not null, checkout date not null, nights integer not null,total decimal(60,2) not null,gst decimal(60,2) not null, grand_t decimal(60,2) not null);
