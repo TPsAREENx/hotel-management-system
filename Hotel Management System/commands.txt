@@ -4,13 +4,13 @@ use hotel_system;
 
 create table login(user_name varchar(20) primary key, passw varchar(10) NOT NULL);
 
-create table rooms(s_no int(3) NOT NULL, room_type char(60) UNIQUE, price decimal(60,2) UNIQUE, bed_size char(60) NOT NULL);
+create table rooms(s_no int(3) NOT NULL, room_type char(60) UNIQUE, price decimal(60,2) UNIQUE, bed_size char(60) NOT NULL, avlble int(10) check (avlble>=0));
 
-insert into rooms values(1,'Deluxe','7999','Single bed')
-    ,(2, 'Basic suite', '11999', 'Double bed')
-    ,(3,'Executive suite', '15999', 'Two-single beds')
-    ,(4,'Garden villa', '18999', 'Queen bed' )
-    ,(5,'Presidential suite', '24999', 'King bed' );
+insert into rooms values(1,'Deluxe','7999','Single bed',20)
+    ,(2, 'Basic suite', '11999', 'Double bed',15)
+    ,(3,'Executive suite', '15999', 'Two-single beds',8)
+    ,(4,'Garden villa', '18999', 'Queen bed',5)
+    ,(5,'Presidential suite', '24999', 'King bed',3);
 
 create table guests(g_id varchar(15) primary key,f_name varchar(60) NOT NULL, l_name varchar(60), age int(4) NOT NULL, gender char(40) NOT NULL, valid_id char(60), room char(60) NOT NULL, checkin date NOT NULL, checkout date NOT NULL);
 
