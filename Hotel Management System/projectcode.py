@@ -2,7 +2,7 @@ from datetime import datetime
 from prettytable import from_db_cursor
 import time
 import mysql.connector as sql
-sqlpass='scottnot' #Enter MySQL password here
+sqlpass='' #Enter MySQL password here
 db_name='hotel_system' #Database name
 
 #connect() function will check for database 'hotel_system' and redirect to/run install() function if no 'hotel_system' database found, if found it will redirect to/run login().
@@ -34,7 +34,7 @@ def install():
     time.sleep(1)
     print('installing resources...')
     time.sleep(1)
-    with open('/Users/areenkhan/hotelmanagementsystem/Hotel Management System/commands.txt','r') as inserts: #If does'nt work then use absolute path.
+    with open('commands.txt','r') as inserts: #If does'nt work then use absolute path.
         n=inserts.read()
         results=mycursor.execute(n, multi=True)
         for cur in results:
