@@ -143,6 +143,8 @@ def menu_options():
 
 #insert() will insert new records in table.
 def insert(): 
+    avlble=True
+    x=None
     if table_n==1:
         r0=input('Please Enter Staff id:')
         r1=input('Please Enter First Name:')
@@ -152,13 +154,24 @@ def insert():
         r5=input('Please Enter Salary:')
         r6=input('Please Enter Designation:')
         r7=input('Please Enter Mobile no.:')
-        x=mycursor.execute(f"""insert into staff values('{r0}','{r1}','{r2}','{r3}','{r4}','{r5}','{r6}','{r7}')""")
+        try:
+            x=mycursor.execute(f"""insert into staff values('{r0}','{r1}','{r2}','{r3}','{r4}','{r5}','{r6}','{r7}')""")
+        except:
+            print('Error Record not added, try again')
+            time.sleep(0.5)
+            insert()
     elif table_n==2:
         r1=input('Please Enter S.no:')
         r2=input('Please Enter Room type:')
         r3=input('Please Enter Price:')
         r4=input('Please Enter Bed size:')
-        x=mycursor.execute(f"""insert into rooms values({r1},'{r2}','{r3}','{r4}')""")
+        r5=input('Please Enter No. of rooms:')
+        try:
+            x=mycursor.execute(f"""insert into rooms values({r1},'{r2}','{r3}','{r4}',{r5})""")
+        except:
+            print('Error Record not added, try again')
+            time.sleep(0.5)
+            insert()
     elif table_n==4:
         r0=input('Please Enter Guest id:')
         r1=input('Please Enter First Name:')
@@ -169,28 +182,49 @@ def insert():
         r6=input('Please Enter Room Type:')
         r7=input('Please Enter Check in date,YYYY-MM-DD:')
         r8=input('Please Enter Check Out date,YYYY-MM-DD:')
-        x=mycursor.execute(f"""insert into guests values('{r0}','{r1}','{r2}',{r3},'{r4}','{r5}','{r6}','{r7}','{r8}')""")
+        try:
+            y=mycursor.execute(f"update rooms set avlble = avlble - 1 where room_type='{r6}'")
+            mycon.commit()
+        except:
+            print(f'{r6} rooms not available!!!')
+            avlble=False
+        if avlble==True:
+            try:
+                x=mycursor.execute(f"""insert into guests values('{r0}','{r1}','{r2}',{r3},'{r4}','{r5}','{r6}','{r7}','{r8}')""")
+            except:
+                print('Error Record not added, try again')
+                time.sleep(0.5)
+                insert()
+        elif avlble==False:
+            print('Redirecting to menu...')
+            time.sleep(0.5)
+            menu()
     elif table_n==5:
         r1=input('Please Enter S.no:')
         r2=input('Please Enter Food Item Name:')
         r3=input('Please Enter Price:')
-        x=mycursor.execute(f"""insert into restaurant values({r1},'{r2}',{r3})""")
+        try:
+            x=mycursor.execute(f"""insert into restaurant values({r1},'{r2}',{r3})""")
+        except:
+            print('Error Record not added, try again')
+            time.sleep(0.5)
+            insert()
     elif table_n==3:
         r1=input('Please Enter Username:')
         r2=input('Please Enter Password:')
-        x=mycursor.execute(f"""insert into login values('{r1}','{r2}')""")
+        try:
+            x=mycursor.execute(f"""insert into login values('{r1}','{r2}')""")
+        except:
+            print('Error Record not added, try again')
+            time.sleep(0.5)
+            insert()
     mycon.commit()
-    if x!=0:
+    if x==None and avlble==True:
         print('Record added successfully')
         time.sleep(1)
         print('Redirecting to menu...')
         menu()
-    elif x==0:
-        print('Error, Record not added')
-        print('Please try again')
-        time.sleep(0.5)
-        insert()
-
+        
 #update() will update existing records in a table.
 def update():
     print('-'*50)
