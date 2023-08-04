@@ -1,0 +1,5 @@
+termcolor
+pwinput
+prettytable
+mysql-connector-python
+datetime
