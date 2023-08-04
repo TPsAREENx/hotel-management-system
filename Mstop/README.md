@@ -4,7 +4,7 @@ INSTALLATION STEPS AND REQUIREMENTS:-
 
 This tool currently only supports Linux/Unix machines!!!
 
-run "git clone http://github.com/TPsAREENx/Python-Projects/Mstop"  
+run "mkdir Mstop" and copy the contents into "Mstop"  
 navigate to "Mstop" directory  
 run "pip3 install -r requirements.txt"  
 open "mstop.py" file and set the value of global variable "My_Sql_Password" to your MySql password.  
